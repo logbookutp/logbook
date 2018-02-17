@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="pl">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="css/materialize.css" type="text/css"
+	 rel="stylesheet" media="screen, projection" />
+	<link href="css/style.css" rel="stylesheet" />
+	 <title>Dodaj Zdarzenie</title>
+</head>
+
+<body>
+	<h1 class="center">Dodawanie zdarzenia w systemie</h1>
+	<h5 class="center" th:text="|Zalogowany jako: ${imie}|"></h5>
+	<br/>
+        <div class="row">		<!-- @ wskazuje na początek ścieżki do kontrolera -->
+             <a class="btn blue-grey col s12 m3" href="/dodajZdarzenie"><span>Dodaj Zdarzenie</span></a>
+             <a class="btn btn-success col s12 m3" href="/wyswietlZdarzenie"><span>Wyświetl Zdarzenia</span></a>
+             <a class="btn btn-success col s12 m3" href="/wyswietlSystemy"><span>Wyświetl Systemy</span></a>
+             <a class="btn red col s12 m3" href="/stronaGlowna"><span>Powrót</span></a>            
+        </div><br/><br/>
+        
+        <div class="row">
+            <div class="center">				
+            <form class="col m8 s12 offset-m2" th:object="${zdarzenie}" method="POST" th:action="@{/dodajZdarzenie}">  <!-- th:object obiekt przeslany z kontrolera o nazwie zdarzenie -->
+                <div class="row">					
+                    <p>Data:</p><input class="datepicker" type="text" th:field="${zdarzenie.dataZdarzenia}" required="required" />			<!-- th:field - pole obiektu zdarzenie klasy Zdarzenie -->
+                </div>
+                <div class="row">
+                	<p>Czas:</p><input class="timepicker" type="text" th:field="${zdarzenie.czasZdarzenia}" required="required" />
+                </div>
+                <div class="row" th:object="${systemy}">
+                	<p>Wybierz System:</p>	
+                	<select class="browser-default" th:field="${zdarzenie.nazwaSystemu}" >
+                		<option value=""></option> 						
+ 						<option th:each="system : ${systemy}"	 
+ 								th:value="${system.name}" th:text="${system.name}" >	<!-- th:each - foreach system - zmienna iterująca po kolekcji ${systemy} -->
+ 					    </option>								
+                	</select>                   
+                 </div>
+                 <div class="input-field col s12">
+                     <p>Opis:</p><textarea id="textarea1" class="materialize-textarea" data-length="255" th:field="${zdarzenie.opis}" required="required"></textarea>
+                 </div>
+                 <div class="row">
+                    <button class="btn">Dodaj Zdarzenie</button>
+                 </div>
+            </form>
+            </div>
+        </div>
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/materialize.min.js"></script>
+        
+    <script>
+    $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Dziś',
+    clear: 'Wyczyść',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+    
+    $('.timepicker').pickatime({
+    default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Wyczyść', // text for clear-button
+    canceltext: 'Anuluj', // Text for cancel-button
+    autoclose: false, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  });
+          
+    $(document).ready(function() {
+        $('input#input_text, textarea#textarea1').characterCounter();
+      });
+    </script>
+</body>
+</html>

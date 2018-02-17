@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="pl">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="css/materialize.css" type="text/css"
+	 rel="stylesheet" media="screen, projection" />
+	<link href="css/style.css" rel="stylesheet" />
+	<title>Home</title>
+</head>
+
+<body>
+<h1 class="center">Strona Główna</h1>
+<h5 class="center" th:text="|Zalogowany jako: ${imie}|"></h5>
+	<br/>
+        <div class="row">		<!-- @ wskazuje na początek ścieżki do kontrolera -->
+             <a class="btn btn-success col s12 m3" href="/dodajZdarzenie"><span>Dodaj Zdarzenie</span></a>
+             <a class="btn btn-success col s12 m3" href="/wyswietlZdarzenie"><span>Wyświetl Zdarzenia</span></a>
+             <a class="btn btn-success col s12 m3" href="/wyswietlSystemy"><span>Wyświetl Systemy</span></a>
+             <a class="btn red col s12 m3" href="/wyloguj"><span>Wyloguj</span></a>             
+        </div>
+    <br/>
+        
+        <div class="container">
+            <table class="striped highlight centered white-text">
+                <th class="center">Id</th>              
+                <th class="center">Nazwa</th>
+                <th class="center">Opis</th>
+                <!--$systemy - kolekcja przyslana przez kontroler /wyswietlZdarzenie-->
+                <tr th:each = "s : ${systemy}">
+                    <td th:text="${s.id}"></td>    
+                    <td th:text="${s.name}"></td> 
+                    <td th:text="${s.description}"></td> 
+                </tr>
+            </table>
+        </div>
+</body>
+</html>

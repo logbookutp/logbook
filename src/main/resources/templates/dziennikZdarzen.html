@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="pl">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="css/materialize.css" type="text/css"
+	 rel="stylesheet" media="screen, projection" />
+	<link href="css/style.css" rel="stylesheet" />
+	<title>Dziennik Zdarzeń</title>
+</head>
+
+<body>
+<h1 class="center">Dziennik Zdarzeń</h1>
+<h5 class="center" th:text="|Zalogowany jako: ${imie}|"></h5>
+<br/>
+        <div class="row">		<!-- @ wskazuje na początek ścieżki do kontrolera -->
+             <a class="btn btn-success col s12 m3" href="/dodajZdarzenie"><span>Dodaj Zdarzenie</span></a>
+             <a class="btn blue-grey col s12 m3" href="/wyswietlZdarzenie"><span>Wyświetl Zdarzenia</span></a>
+             <a class="btn btn-success col s12 m3" href="/wyswietlSystemy"><span>Wyświetl Systemy</span></a>
+             <a class="btn red col s12 m3" href="/stronaGlowna"><span>Powrót</span></a>
+        </div><br/><br/>
+        
+        <div class="container">
+            <table class="striped highlight centered white-text">
+                <!-- <th class="center">Autor</th> -->
+                <th class="center">Data</th>
+                <th class="center">Czas</th>
+                <th class="center">Opis</th>
+                <th class="center">System</th>
+                <th class="center">Administrator</th>
+                <!--$zdarzenia - kolekcja przyslana przez kontroler /wyswietlZdarzenie-->
+                <tr th:each = "z : ${zdarzenia}">
+                    <!-- <td th:text="${z.uzytkownik}"></td> -->
+                    <td th:text="${z.dataZdarzenia}"></td>
+                    <td th:text="${z.czasZdarzenia}"></td>
+                    <td th:text="${z.opis}"></td>
+                    <td th:text="${z.nazwaSystemu}"></td>
+                    <td th:text="${z.uzytkownik}"></td>
+                </tr>
+            </table>
+        </div>
+</body>
+</html>

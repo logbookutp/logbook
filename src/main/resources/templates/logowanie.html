@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="pl">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link href="css/materialize.css" type="text/css"
+	 rel="stylesheet" media="screen, projection" />
+	<link href="css/style.css" rel="stylesheet" />
+	<title>Logowanie</title>
+</head>
+
+<body>
+		<h1 class="center">Logbook</h1>
+        <h3 class="center">Logowanie</h3>
+            <form class="col m8 s12 offset-m2 text" th:object="${user}" method="POST" th:action="@{/zaloguj}">               
+                <div class="row center">
+                    <div class="input-field col s6 offset-s3">
+                        <input type="text" th:field="${user.login}" required="required" placeholder="login"/>   
+                    </div>
+                </div>
+                <div class="row center">
+                    <div class="input-field col s6 offset-s3">
+                        <input type="password" th:field="${user.password}" required="required" placeholder="hasło"/>   
+                    </div>
+                </div>
+                <div class="row s12 center">
+                    <button class="btn green">Zaloguj</button>
+                </div>
+            </form>
+</body>
+</html>
